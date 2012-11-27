@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="main2">
+		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'pessoa.label', default: 'Palestra')}" />
 		<title>Submeter Palestra</title>
 	</head>

@@ -9,7 +9,7 @@ class InscricaoController {
 
     def jmeetingsMailService
 
-	def inscricaoSimples = {
+	def inscricaoSimples() {
 
 		def inscricaoInstance = new Inscricao(params)
 
@@ -26,7 +26,7 @@ class InscricaoController {
 		}
 	}
 
-    def buscar = {
+    def buscar() {
         render(view: 'list', model: getFiltroList(params))
     }
 
@@ -38,24 +38,24 @@ class InscricaoController {
         [inscricaoInstanceList:lista, inscricaoInstanceTotal:lista.size(), filtro:params.filtro]
 	}
 
-    def buscarPremiaveis = {
+    def buscarPremiaveis() {
         def premiaveisList = Inscricao.buscarPremiaveis()
         render(view: "sorteio", model: [premiaveisList:premiaveisList])
     }
 
-    def sortear = {
+    def sortear() {
         if(params.id) {
             Inscricao.get(params.id).marcarSorteado()
         }
         redirect(action:'buscarPremiaveis')
     }
 
-    def premiar = {
+    def premiar() {
          def inscricao = Inscricao.get(params.id).marcarPremiado()
          redirect(action:'buscarPremiaveis')
     }
 
-    def confirmar = {
+    def confirmar() {
         if(request.method == 'GET') {
             def modelo = [:]
             def inscricao = Inscricao.buscarPorEventoECpf(params.evento, params.cpf)
@@ -83,17 +83,17 @@ class InscricaoController {
         }
     }
 
-    def checkin = {
+    def checkin() {
         Inscricao.get(params.id).checkin()
         render(view: "list", model:getModeloList(params, flash))
     }
 
-    def receberKit = {
+    def receberKit() {
         Inscricao.get(params.id).receberKit()
         render(view: "list", model:getModeloList(params, flash))
     }
 
-    def index = {
+    def index() {
         redirect(action: "list", params: params)
     }
 
@@ -130,17 +130,17 @@ class InscricaoController {
 		
 	}
 
-    def list = {
+    def list() {
 		getModeloList(params, flash)
     }
 
-    def create = {
+    def create() {
         def inscricaoInstance = new Inscricao()
         inscricaoInstance.properties = params
         return [inscricaoInstance: inscricaoInstance]
     }
 
-    def save = {
+    def save() {
         def inscricaoInstance = new Inscricao(params)
         //aqui eu limpo o cpf para deixar só os números
         inscricaoInstance.participante.cpf = inscricaoInstance.participante.cpf?.trim().replaceAll('\\.', '').replaceAll('\\-', '')
@@ -167,7 +167,7 @@ class InscricaoController {
         }
     }
 
-    def show = {
+    def show() {
         def inscricaoInstance = Inscricao.get(params.id)
         if (!inscricaoInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'inscricao.label', default: 'Inscricao'), params.id])}"
@@ -178,7 +178,7 @@ class InscricaoController {
         }
     }
 
-    def edit = {
+    def edit() {
         def inscricaoInstance = Inscricao.get(params.id)
         if (!inscricaoInstance) {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'inscricao.label', default: 'Inscricao'), params.id])}"
@@ -189,7 +189,7 @@ class InscricaoController {
         }
     }
 
-    def update = {
+    def update() {
         def inscricaoInstance = Inscricao.get(params.id)
         if (inscricaoInstance) {
             if (params.version) {
@@ -215,7 +215,7 @@ class InscricaoController {
         }
     }
 
-    def delete = {
+    def delete() {
         def inscricaoInstance = Inscricao.get(params.id)
         if (inscricaoInstance) {
             try {

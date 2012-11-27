@@ -1,8 +1,0 @@
-target
-.DS_Store
-stacktrace.log
-.classpath
-.project
-.settings/
-jmeeting_db*
-*~
