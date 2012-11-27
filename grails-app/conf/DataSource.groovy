@@ -23,7 +23,8 @@ environments {
             url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
     }
-    production {
+	
+    production_old {
         dataSource {
             dbCreate = "update"
             url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
@@ -37,6 +38,27 @@ environments {
                testWhileIdle=true
                testOnReturn=true
                validationQuery="SELECT 1"
+            }
+        }
+    }
+    
+    production {
+        dataSource {
+            driverClassName = "com.mysql.jdbc.Driver"
+            dbCreate = "update"
+            url = "jdbc:mysql://localhost/jmeetings"
+            username = "root"
+            password = "root"
+            dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+            properties {
+                maxActive = 50
+                maxIdle = 25
+                minIdle = 5
+                initialSize = 5
+                minEvictableIdleTimeMillis = 60000
+                timeBetweenEvictionRunsMillis = 60000
+                maxWait = 10000
+                //validationQuery = "/* ping */"
             }
         }
     }

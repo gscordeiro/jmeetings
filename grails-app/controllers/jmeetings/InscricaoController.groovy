@@ -11,6 +11,8 @@ class InscricaoController {
 
 	def inscricaoSimples() {
 
+		println "######>> $params"
+		
 		def inscricaoInstance = new Inscricao(params)
 
 		/*if(inscricaoInstance.validate() & inscricaoInstance.participante.validate(['nome', 'email'])){

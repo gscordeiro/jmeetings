@@ -14,8 +14,8 @@ class Participante {
     Boolean administrador
 
     static constraints = {
-        nome(length:2..50, blank:false)
-        email(blank:false)
+        nome(nullable:false, length:2..50, blank:false)
+        email(nullable:false, blank:false)
         email(unique:true,email:true)
         senha(blank:false,password:true)
         senha(maxSize:45)

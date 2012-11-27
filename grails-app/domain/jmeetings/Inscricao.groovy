@@ -26,11 +26,12 @@ class Inscricao {
     Boolean premiado = false
 
 	boolean inscricaoSimples(){
+		
 		//xucro! FIXME buscar o evento pela sessao ou combobox
-		evento = Evento.get(1)
+		this.evento = Evento.get(1)
 		fezCheckin = true
 		if(this.participante.validate(['nome', 'email'])){
-			save(validate: false)
+			save()
 		}
 	}
 
@@ -122,9 +123,8 @@ class Inscricao {
             if(errorFound) return false;
         })
 		
-        confirmado(nullable:true)
-        comoSoube(nullable:true, maxSize:1000)
-        expectativas(nullable:true, maxSize:1000)
+        comoSoube(maxSize:1000)
+        expectativas(maxSize:1000)
 
     }
 }
