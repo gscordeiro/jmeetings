@@ -13,6 +13,11 @@ class Participante {
     String cidade
     Boolean administrador
 
+	static mapping = {
+		nome index: 'nome_idx'
+		email index: 'email_idx'
+	}
+	
     static constraints = {
         nome(nullable:false, length:2..50, blank:false)
         email(nullable:false, blank:false)
@@ -23,11 +28,12 @@ class Participante {
         instituicao(length:2..100,blank:true,maxSize:50)
         cidade(maxSize:50)
 		administrador(nullable:true)
+		
     }
 
-	static indexes = {
-		nome('nome')
-	}
+//	static indexes = {
+//		nome('nome')
+//	}
 
 	static constraintGroups = [
 		simple: ["nome", "email"]//,
